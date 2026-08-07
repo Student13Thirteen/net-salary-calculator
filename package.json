@@ -16,6 +16,7 @@
     "vitest": "^3.2.0"
   },
   "dependencies": {
+    "@fontsource-variable/newsreader": "^5.3.0",
     "@fontsource/wix-madefor-display": "^5.3.0"
   }
 }

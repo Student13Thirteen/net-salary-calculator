@@ -238,10 +238,14 @@ docs/ESTENDERE_LOCALITA.md  metodo per aggiungere una località
 
 ## Scelte di interfaccia
 
-- **Wix Madefor Display** è incorporato nel bundle tramite Fontsource: la resa non
-  dipende dai font installati sul dispositivo.
-- I risultati principali mostrano separatamente netto annuale, netto medio, imposte e
-  contributi.
+- **Wix Madefor Display** è usato per interfaccia e numeri; **Newsreader** aggiunge un
+  contrasto editoriale nei passaggi più espressivi. Entrambi sono incorporati nel bundle
+  tramite Fontsource, quindi la resa non dipende dai font installati sul dispositivo.
+- Il primo schermo usa una gerarchia molto semplice: messaggio, RAL, mensilità e azione
+  principale. Le note tecniche sull'architettura restano nella documentazione e non
+  competono con il compito dell'utente.
+- Il riepilogo evidenzia netto annuale, netto medio e tasse. I contributi restano visibili
+  nella ripartizione e nel dettaglio completo del calcolo.
 - Milano è sempre visibile come scenario applicato, senza mostrare selezioni non ancora
   supportate.
 - Animazioni e transizioni sono brevi e vengono disattivate quando il dispositivo

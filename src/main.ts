@@ -3,6 +3,7 @@ import "@fontsource/wix-madefor-display/latin-500.css";
 import "@fontsource/wix-madefor-display/latin-600.css";
 import "@fontsource/wix-madefor-display/latin-700.css";
 import "@fontsource/wix-madefor-display/latin-800.css";
+import "@fontsource-variable/newsreader/wght-italic.css";
 import "./styles.css";
 import {
   calculateNetSalary,

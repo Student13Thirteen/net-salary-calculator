@@ -7,7 +7,7 @@
       name="description"
       content="Calcola una stima trasparente del netto annuale e mensile partendo dalla RAL, con dettaglio di contributi e imposte per lo scenario Milano 2026."
     />
-    <meta name="theme-color" content="#5046e5" />
+    <meta name="theme-color" content="#5b4cf0" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="it_IT" />
     <meta property="og:title" content="Quanto resta? — Stima netto da RAL" />
@@ -45,8 +45,8 @@
       </a>
 
       <nav class="site-nav" aria-label="Navigazione principale">
-        <a href="#method">Metodo</a>
-        <a href="#sources">Fonti</a>
+        <a href="#method">Come funziona</a>
+        <a href="#sources">Le fonti</a>
       </nav>
 
       <span class="year-badge">
@@ -59,30 +59,24 @@
     <main id="top">
       <section class="hero" aria-labelledby="page-title">
         <div class="hero-copy">
-          <p class="eyebrow">STIMA NETTO DA RAL</p>
+          <p class="eyebrow">CALCOLATORE LORDO → NETTO</p>
           <h1 id="page-title">
-            Dalla RAL al netto,<br />
-            <span>con i conti in chiaro.</span>
+            Quanto resta<br />
+            <span>della tua RAL?</span>
           </h1>
           <p class="hero-intro">
-            Inserisci la retribuzione annua lorda e scegli le mensilità. Vedrai una
-            stima del netto e il dettaglio di contributi e imposte.
+            Inserisci la RAL e scegli le mensilità. Ti mostriamo il netto stimato e
+            tutte le trattenute, voce per voce.
           </p>
-          <ul class="hero-facts" aria-label="Caratteristiche della stima">
-            <li>Scenario Milano 2026</li>
-            <li>Fonti istituzionali</li>
-            <li>Calcolo spiegato</li>
-          </ul>
         </div>
 
         <form class="calculator-card" id="salary-form" novalidate>
           <div class="calculator-heading">
-            <p class="card-kicker">CALCOLATORE NETTO</p>
-            <div class="calculator-scenario">
-              <span>Scenario</span>
-              <strong data-location-display>Milano, Lombardia</strong>
-              <a href="#method" aria-label="Leggi le assunzioni dello scenario">?</a>
+            <div>
+              <p class="card-kicker">STIMA 2026</p>
+              <h2>Partiamo dalla RAL</h2>
             </div>
+            <span class="scenario-pill" data-location-municipality>Milano</span>
           </div>
 
           <div class="field-group">
@@ -132,13 +126,9 @@
           </div>
 
           <button class="primary-button" type="submit">
-            <span>Calcola la stima</span>
+            <span>Calcola il netto</span>
             <span class="button-arrow" aria-hidden="true">→</span>
           </button>
-
-          <p class="calculator-disclaimer">
-            È una simulazione informativa: non sostituisce il cedolino.
-          </p>
         </form>
       </section>
 
@@ -151,44 +141,27 @@
       >
         <div class="section-heading">
           <div>
-            <p class="eyebrow">LA TUA STIMA</p>
-            <h2 id="results-title">I numeri principali</h2>
+            <p class="eyebrow">IL RISULTATO</p>
+            <h2 id="results-title">Ecco quanto resta</h2>
           </div>
           <p id="result-context">Milano, Lombardia · RAL €35.000 · 13 mensilità</p>
         </div>
 
         <div class="summary-grid">
           <article class="summary-card summary-card--net">
-            <div class="summary-label">
-              <span>01</span>
-              <p>Netto annuale stimato</p>
-            </div>
+            <p class="summary-label">Netto annuale stimato</p>
             <strong data-money="annualNetSalary">€0</strong>
-            <span>Quanto resta nell'arco dell'anno.</span>
+            <span>La somma che resta dopo contributi e imposte.</span>
           </article>
           <article class="summary-card">
-            <div class="summary-label">
-              <span>02</span>
-              <p>Netto medio</p>
-            </div>
+            <p class="summary-label">Netto medio per mensilità</p>
             <strong data-money="averageNetPerPayment">€0</strong>
             <span id="monthly-caption">Media su 13 mensilità.</span>
           </article>
           <article class="summary-card summary-card--taxes">
-            <div class="summary-label">
-              <span>03</span>
-              <p>Imposte stimate</p>
-            </div>
+            <p class="summary-label">Tasse stimate</p>
             <strong data-money="totalTaxes">€0</strong>
             <span id="taxes-rate">0% della RAL</span>
-          </article>
-          <article class="summary-card summary-card--contributions">
-            <div class="summary-label">
-              <span>04</span>
-              <p>Contributi stimati</p>
-            </div>
-            <strong data-money="socialSecurityContributions">€0</strong>
-            <span id="contributions-rate">0% della RAL</span>
           </article>
         </div>
 
@@ -217,7 +190,10 @@
             </li>
             <li>
               <span class="legend-dot legend-dot--contributions"></span>
-              <div><span>Contributi</span><strong id="contributions-percentage">0%</strong></div>
+              <div>
+                <span>Contributi <small id="contributions-rate">0% della RAL</small></span>
+                <strong id="contributions-percentage">0%</strong>
+              </div>
             </li>
             <li>
               <span class="legend-dot legend-dot--taxes"></span>
@@ -338,67 +314,49 @@
       <section class="method" id="method" aria-labelledby="method-title">
         <div class="section-heading section-heading--compact">
           <div>
-            <p class="eyebrow">COME LEGGERE LA STIMA</p>
-            <h2 id="method-title">Un caso preciso, spiegato bene</h2>
+            <p class="eyebrow">COSA STIAMO CALCOLANDO</p>
+            <h2 id="method-title">Una stima semplice, con confini chiari</h2>
           </div>
           <p>
-            Abbiamo fissato un profilo standard per tenere il calcolo comprensibile e
+            Il caso è volutamente standard: così ogni passaggio resta comprensibile e
             verificabile.
           </p>
         </div>
 
         <div class="method-grid">
           <article>
-            <span>01</span>
-            <h3>Scenario di lavoro</h3>
+            <p class="method-label">IL PROFILO USATO</p>
+            <h3>Dipendente a Milano</h3>
             <p>
               Dipendente privato, impiegato a tempo indeterminato, residente a
               <span data-location-municipality>Milano</span> e assunto per tutto il 2026.
             </p>
           </article>
           <article>
-            <span>02</span>
-            <h3>Contributi stimati</h3>
+            <p class="method-label">COSA SOTTRAIAMO</p>
+            <h3>Contributi e imposte</h3>
             <p>
-              Quota lavoratore al 9,19%, più l'1% sulla parte di RAL oltre €56.224.
-              Settore e dimensione aziendale possono cambiare il dato reale.
+              Contributi del lavoratore, IRPEF e addizionali di Lombardia e Milano,
+              applicando la detrazione da lavoro dipendente.
             </p>
           </article>
           <article>
-            <span>03</span>
-            <h3>Confini della stima</h3>
+            <p class="method-label">DOVE CI FERMIAMO</p>
+            <h3>Un caso senza eccezioni</h3>
             <p>
               Non include bonus, benefit, familiari, deduzioni, trattamento integrativo
               o regole specifiche del singolo cedolino.
             </p>
           </article>
         </div>
-
-        <div class="extension-note">
-          <div class="extension-mark" aria-hidden="true">↗</div>
-          <div>
-            <p class="card-kicker">PENSATO PER EVOLVERE</p>
-            <h3>Milano è fisso nell'interfaccia, non nel motore di calcolo.</h3>
-            <p>
-              Aliquote, soglie e fonti territoriali vivono in un profilo separato. Una
-              nuova località può essere aggiunta senza riscrivere le formule nazionali.
-            </p>
-          </div>
-          <a
-            href="https://github.com/Student13Thirteen/jet-hr-net-salary-calculator/blob/main/docs/ESTENDERE_LOCALITA.md"
-            target="_blank"
-            rel="noreferrer"
-          >Leggi la guida</a>
-        </div>
       </section>
 
       <section class="sources" id="sources" aria-labelledby="sources-title">
         <div>
-          <p class="eyebrow">FONTI CONSULTATE</p>
-          <h2 id="sources-title">Dati che puoi verificare</h2>
+          <p class="eyebrow">FONTI ISTITUZIONALI</p>
+          <h2 id="sources-title">Le fonti, una per una</h2>
           <p>
-            I parametri sono raccolti nella configurazione e collegati alle pagine
-            istituzionali da cui provengono.
+            Aliquote e soglie rimandano direttamente alle pagine consultate.
           </p>
         </div>
         <ul>
