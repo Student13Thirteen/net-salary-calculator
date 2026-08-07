@@ -105,7 +105,7 @@ footer {
 .brand {
   width: fit-content;
   color: var(--ink);
-  font-weight: 760;
+  font-weight: 700;
   letter-spacing: -0.025em;
   text-decoration: none;
 }
@@ -133,7 +133,7 @@ footer {
 .site-nav a {
   color: var(--ink-soft);
   font-size: 0.84rem;
-  font-weight: 650;
+  font-weight: 500;
   text-decoration: none;
   transition: color 150ms ease;
 }
@@ -152,7 +152,7 @@ footer {
   background: rgba(255, 253, 250, 0.78);
   color: var(--ink-soft);
   font-size: 0.76rem;
-  font-weight: 720;
+  font-weight: 600;
   backdrop-filter: blur(12px);
 }
 
@@ -217,7 +217,7 @@ h1 {
   max-width: 810px;
   margin-bottom: 30px;
   font-size: clamp(4.15rem, 7.5vw, 6.8rem);
-  font-weight: 720;
+  font-weight: 800;
   line-height: 0.88;
 }
 
@@ -235,7 +235,7 @@ h1 span {
 h2 {
   margin-bottom: 0;
   font-size: clamp(2.8rem, 5.6vw, 4.8rem);
-  font-weight: 720;
+  font-weight: 800;
 }
 
 h3 {
@@ -293,7 +293,7 @@ h3 {
   margin-bottom: var(--space-2);
   color: var(--ink);
   font-size: 0.86rem;
-  font-weight: 720;
+  font-weight: 600;
 }
 
 .currency-field {
@@ -333,14 +333,14 @@ h3 {
   color: var(--ink);
   font-size: 1.9rem;
   font-variant-numeric: tabular-nums;
-  font-weight: 760;
+  font-weight: 700;
   letter-spacing: -0.045em;
 }
 
 .currency-field small {
   color: var(--ink-soft);
   font-size: 0.67rem;
-  font-weight: 760;
+  font-weight: 600;
   letter-spacing: 0.11em;
 }
 
@@ -354,7 +354,7 @@ h3 {
 
 .field-error {
   color: var(--danger);
-  font-weight: 680;
+  font-weight: 600;
 }
 
 .field-error:empty {
@@ -391,7 +391,7 @@ h3 {
   cursor: pointer;
   font-size: 0.74rem;
   font-variant-numeric: tabular-nums;
-  font-weight: 680;
+  font-weight: 500;
   transition: border-color 150ms ease, color 150ms ease, transform 150ms ease;
 }
 
@@ -424,7 +424,7 @@ h3 {
   appearance: none;
   background: white;
   color: var(--ink);
-  font-weight: 680;
+  font-weight: 500;
 }
 
 .primary-button {
@@ -441,7 +441,7 @@ h3 {
   box-shadow: 0 13px 28px rgba(91, 76, 240, 0.25);
   color: white;
   cursor: pointer;
-  font-weight: 760;
+  font-weight: 700;
   transition: background 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
@@ -541,7 +541,7 @@ h3 {
 .summary-label {
   margin: 0;
   font-size: 0.86rem;
-  font-weight: 740;
+  font-weight: 600;
   line-height: 1.3;
 }
 
@@ -585,7 +585,7 @@ h3 {
 
 .split-heading > p {
   font-size: 0.82rem;
-  font-weight: 680;
+  font-weight: 600;
 }
 
 .salary-bar {
@@ -642,14 +642,14 @@ h3 {
   margin: 0;
   color: var(--ink-soft);
   font-size: 0.8rem;
-  font-weight: 680;
+  font-weight: 500;
 }
 
 .legend-share {
   margin: 0;
   font-size: clamp(1.15rem, 2.1vw, 1.5rem);
   font-variant-numeric: tabular-nums;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.045em;
   line-height: 1.05;
 }
@@ -687,9 +687,13 @@ h3 {
   margin-top: var(--gutter);
 }
 
+/* Niente overflow: hidden, altrimenti le spiegazioni ⓘ vengono tagliate dal
+   bordo della card. La fascia verde del totale si arrotonda da sola.
+   min-width: 0 sostituisce il vincolo di larghezza minima che l'overflow
+   nascosto garantiva: senza, la card non si restringe sotto i 370px. */
 .detail-card,
 .brackets-card {
-  overflow: hidden;
+  min-width: 0;
   padding: var(--card-pad);
 }
 
@@ -701,6 +705,7 @@ h3 {
 }
 
 .brackets-card .table-wrapper {
+  min-width: 0;
   flex: 1;
 }
 
@@ -731,6 +736,7 @@ h3 {
 .calculation-list dt {
   color: var(--ink-soft);
   font-size: 0.81rem;
+  font-weight: 400;
   line-height: 1.45;
 }
 
@@ -739,24 +745,29 @@ h3 {
   white-space: nowrap;
 }
 
+/* Un solo peso per gli importi e un solo colore: il segno − o + distingue le
+   voci, non la tinta. Nessuna riga è più colorata delle altre. */
 .calculation-list dd {
   margin: 0;
-  font-weight: 720;
+  color: var(--ink);
+  font-weight: 600;
   text-align: right;
   white-space: nowrap;
 }
 
-.calculation-list__contribution dd {
-  color: #925200;
-}
-
-.calculation-list__credit dd {
-  color: #3d6e0e;
-}
-
+/* I passaggi intermedi si riconoscono dal filo più marcato e dall'etichetta in
+   nero pieno, non da un grassetto che spezza la colonna. */
 .calculation-list__subtotal {
   border-top-color: var(--line) !important;
-  font-weight: 720;
+}
+
+.calculation-list__subtotal dt {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.calculation-list__subtotal dd {
+  font-weight: 700;
 }
 
 /* Fascia a tutta larghezza, allineata esatta ai bordi della card: il totale
@@ -765,6 +776,8 @@ h3 {
   margin: var(--space-4) calc(var(--card-pad) * -1) calc(var(--card-pad) * -1);
   padding: var(--space-5) var(--card-pad) !important;
   border: 0 !important;
+  border-end-start-radius: calc(var(--radius-medium) - 1px);
+  border-end-end-radius: calc(var(--radius-medium) - 1px);
   background: var(--net);
 }
 
@@ -772,15 +785,20 @@ h3 {
 .calculation-list__total dd {
   color: var(--net-ink);
   font-size: 0.98rem;
-  font-weight: 800;
+  font-weight: 700;
+}
+
+/* Il riquadro è posizionato rispetto alla riga, non rispetto al bottone da
+   18px: così parte dal bordo dell'etichetta e non può mai sporgere dalla card. */
+.calculation-list > div {
+  position: relative;
 }
 
 .info-button {
-  position: relative;
   display: inline-grid;
   width: 18px;
   height: 18px;
-  margin-left: 3px;
+  margin-left: 4px;
   padding: 0;
   place-items: center;
   border: 1px solid #b8b4ac;
@@ -789,34 +807,47 @@ h3 {
   color: var(--ink-soft);
   cursor: help;
   font-size: 0.66rem;
-  font-weight: 800;
+  font-weight: 700;
+  transition: border-color 140ms ease, color 140ms ease;
+}
+
+.info-button:hover,
+.info-button:focus-visible {
+  border-color: var(--ink);
+  color: var(--ink);
 }
 
 .info-button::after {
   position: absolute;
-  z-index: 2;
-  bottom: calc(100% + 10px);
-  left: 50%;
-  width: min(255px, 72vw);
-  padding: 10px 12px;
-  border-radius: 10px;
+  z-index: 3;
+  bottom: calc(100% + var(--space-1));
+  left: 0;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(340px, 100%);
+  padding: var(--space-3) 14px;
+  border-radius: 12px;
   content: attr(data-tooltip);
   background: var(--ink);
+  box-shadow: 0 12px 28px rgba(23, 21, 29, 0.22);
   color: white;
-  font-size: 0.7rem;
-  font-weight: 500;
-  line-height: 1.4;
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.45;
   opacity: 0;
   pointer-events: none;
   text-align: left;
-  transform: translate(-50%, 5px);
+  /* Annulla il nowrap ereditato da .term-tail: il testo deve andare a capo. */
+  white-space: normal;
+  transform: translateY(5px);
   transition: opacity 140ms ease, transform 140ms ease;
 }
 
 .info-button:hover::after,
 .info-button:focus-visible::after {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: translateY(0);
 }
 
 .table-wrapper {
@@ -857,14 +888,14 @@ thead th {
 }
 
 tbody th {
-  font-weight: 680;
+  font-weight: 500;
 }
 
 tfoot th,
 tfoot td {
   padding-top: var(--space-5);
   border-bottom: 0;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .method {
@@ -974,7 +1005,7 @@ tfoot td {
   gap: var(--space-4);
   padding: var(--space-4) 0;
   font-size: 0.84rem;
-  font-weight: 680;
+  font-weight: 500;
   text-decoration: none;
 }
 
@@ -1015,7 +1046,7 @@ footer p {
 
 footer > a {
   color: var(--ink);
-  font-weight: 720;
+  font-weight: 600;
   text-decoration: none;
 }
 
@@ -1182,8 +1213,12 @@ footer > a {
 }
 
 @media (max-width: 420px) {
+  /* Raggi ridotti dalle variabili: così la fascia verde del totale resta
+     allineata al bordo della card anche qui. */
   :root {
     --card-pad: 20px;
+    --radius-large: 19px;
+    --radius-medium: 19px;
   }
 
   .site-header,
@@ -1203,15 +1238,6 @@ footer > a {
 
   h1 {
     font-size: 3.18rem;
-  }
-
-  .calculator-card,
-  .summary-card,
-  .split-card,
-  .detail-card,
-  .brackets-card,
-  .method-grid article {
-    border-radius: 19px;
   }
 
   .calculator-heading {
