@@ -5,9 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Stima trasparente della retribuzione netta annuale da RAL per un dipendente privato residente a Milano."
+      content="Calcola una stima trasparente del netto annuale e mensile partendo dalla RAL, con dettaglio di contributi e imposte per lo scenario Milano 2026."
     />
-    <meta name="theme-color" content="#5a48f5" />
+    <meta name="theme-color" content="#5046e5" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:title" content="Quanto resta? — Stima netto da RAL" />
+    <meta
+      property="og:description"
+      content="Dalla RAL al netto, con il dettaglio di contributi e imposte per lo scenario Milano 2026."
+    />
+    <meta
+      property="og:url"
+      content="https://student13thirteen.github.io/jet-hr-net-salary-calculator/"
+    />
+    <meta
+      property="og:image"
+      content="https://student13thirteen.github.io/jet-hr-net-salary-calculator/og.png"
+    />
+    <meta property="og:image:width" content="1536" />
+    <meta property="og:image:height" content="1024" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Quanto resta? — Stima netto da RAL" />
+    <meta
+      name="twitter:description"
+      content="Dalla RAL al netto, con il dettaglio di contributi e imposte per lo scenario Milano 2026."
+    />
+    <meta
+      name="twitter:image"
+      content="https://student13thirteen.github.io/jet-hr-net-salary-calculator/og.png"
+    />
     <title>Quanto resta? — Stima netto da RAL</title>
   </head>
   <body>
@@ -16,21 +43,48 @@
         <span class="brand-mark" aria-hidden="true">Q</span>
         <span>Quanto resta?</span>
       </a>
-      <span class="year-badge">Stima 2026 · Milano</span>
+
+      <nav class="site-nav" aria-label="Navigazione principale">
+        <a href="#method">Metodo</a>
+        <a href="#sources">Fonti</a>
+      </nav>
+
+      <span class="year-badge">
+        <span>2026</span>
+        <span aria-hidden="true">·</span>
+        <span data-location-municipality>Milano</span>
+      </span>
     </header>
 
     <main id="top">
       <section class="hero" aria-labelledby="page-title">
         <div class="hero-copy">
-          <p class="eyebrow">RAL → NETTO, PASSO PER PASSO</p>
-          <h1 id="page-title">Il tuo lordo,<br /><em>senza zone d’ombra.</em></h1>
+          <p class="eyebrow">STIMA NETTO DA RAL</p>
+          <h1 id="page-title">
+            Dalla RAL al netto,<br />
+            <span>con i conti in chiaro.</span>
+          </h1>
           <p class="hero-intro">
-            Una stima annuale semplice che mostra cosa viene trattenuto e perché.
-            Nessuna formula nascosta.
+            Inserisci la retribuzione annua lorda e scegli le mensilità. Vedrai una
+            stima del netto e il dettaglio di contributi e imposte.
           </p>
+          <ul class="hero-facts" aria-label="Caratteristiche della stima">
+            <li>Scenario Milano 2026</li>
+            <li>Fonti istituzionali</li>
+            <li>Calcolo spiegato</li>
+          </ul>
         </div>
 
         <form class="calculator-card" id="salary-form" novalidate>
+          <div class="calculator-heading">
+            <p class="card-kicker">CALCOLATORE NETTO</p>
+            <div class="calculator-scenario">
+              <span>Scenario</span>
+              <strong data-location-display>Milano, Lombardia</strong>
+              <a href="#method" aria-label="Leggi le assunzioni dello scenario">?</a>
+            </div>
+          </div>
+
           <div class="field-group">
             <label for="gross-salary">Retribuzione annua lorda</label>
             <div class="currency-field" id="gross-salary-wrapper">
@@ -49,7 +103,7 @@
               <small>RAL</small>
             </div>
             <p class="field-hint" id="gross-salary-hint">
-              Inserisci la somma lorda indicata nella proposta o nel contratto.
+              Usa l'importo lordo annuale indicato nella proposta o nel contratto.
             </p>
             <p class="field-error" id="gross-salary-error" aria-live="polite"></p>
           </div>
@@ -73,14 +127,18 @@
               </select>
             </div>
             <p class="field-hint">
-              Cambia solo la media per mensilità, non il netto annuale.
+              Cambia la media mensile, non il netto annuale.
             </p>
           </div>
 
           <button class="primary-button" type="submit">
-            <span>Calcola il netto</span>
-            <span aria-hidden="true">→</span>
+            <span>Calcola la stima</span>
+            <span class="button-arrow" aria-hidden="true">→</span>
           </button>
+
+          <p class="calculator-disclaimer">
+            È una simulazione informativa: non sostituisce il cedolino.
+          </p>
         </form>
       </section>
 
@@ -93,37 +151,54 @@
       >
         <div class="section-heading">
           <div>
-            <p class="eyebrow">LA STIMA IN BREVE</p>
-            <h2 id="results-title">Ecco quanto resta</h2>
+            <p class="eyebrow">LA TUA STIMA</p>
+            <h2 id="results-title">I numeri principali</h2>
           </div>
-          <p id="result-context">Su una RAL di €35.000 · 13 mensilità</p>
+          <p id="result-context">Milano, Lombardia · RAL €35.000 · 13 mensilità</p>
         </div>
 
         <div class="summary-grid">
           <article class="summary-card summary-card--net">
-            <p>Netto annuale stimato</p>
+            <div class="summary-label">
+              <span>01</span>
+              <p>Netto annuale stimato</p>
+            </div>
             <strong data-money="annualNetSalary">€0</strong>
-            <span>La somma che rimane dopo contributi e imposte.</span>
+            <span>Quanto resta nell'arco dell'anno.</span>
           </article>
           <article class="summary-card">
-            <p>Netto medio per mensilità</p>
+            <div class="summary-label">
+              <span>02</span>
+              <p>Netto medio</p>
+            </div>
             <strong data-money="averageNetPerPayment">€0</strong>
             <span id="monthly-caption">Media su 13 mensilità.</span>
           </article>
-          <article class="summary-card">
-            <p>Totale trattenute</p>
-            <strong data-money="totalWithholdings">€0</strong>
-            <span>Contributi previdenziali più imposte.</span>
+          <article class="summary-card summary-card--taxes">
+            <div class="summary-label">
+              <span>03</span>
+              <p>Imposte stimate</p>
+            </div>
+            <strong data-money="totalTaxes">€0</strong>
+            <span id="taxes-rate">0% della RAL</span>
+          </article>
+          <article class="summary-card summary-card--contributions">
+            <div class="summary-label">
+              <span>04</span>
+              <p>Contributi stimati</p>
+            </div>
+            <strong data-money="socialSecurityContributions">€0</strong>
+            <span id="contributions-rate">0% della RAL</span>
           </article>
         </div>
 
         <article class="split-card" aria-labelledby="split-title">
           <div class="split-heading">
             <div>
-              <p class="eyebrow">DOVE VA LA RAL</p>
-              <h3 id="split-title">Ogni euro, a colpo d’occhio</h3>
+              <p class="eyebrow">RIPARTIZIONE DELLA RAL</p>
+              <h3 id="split-title">Come si divide il lordo</h3>
             </div>
-            <p>Le proporzioni sono calcolate sulla RAL inserita.</p>
+            <p id="withholdings-rate">0% trattenuto</p>
           </div>
           <div
             class="salary-bar"
@@ -169,7 +244,7 @@
                     class="info-button"
                     type="button"
                     aria-label="Spiegazione contributi previdenziali"
-                    data-tooltip="Finanziano il sistema previdenziale. Non sono imposte e riducono l’imponibile fiscale."
+                    data-tooltip="Finanziano il sistema previdenziale. Non sono imposte e riducono l'imponibile fiscale."
                   >i</button>
                 </dt>
                 <dd data-money-negative="socialSecurityContributions">− €0</dd>
@@ -181,7 +256,7 @@
                     class="info-button"
                     type="button"
                     aria-label="Spiegazione imponibile fiscale"
-                    data-tooltip="È la base sulla quale vengono calcolate IRPEF e addizionali: RAL meno contributi."
+                    data-tooltip="È la base su cui vengono calcolate IRPEF e addizionali: RAL meno contributi."
                   >i</button>
                 </dt>
                 <dd data-money="taxableIncome">€0</dd>
@@ -197,7 +272,7 @@
                     class="info-button"
                     type="button"
                     aria-label="Spiegazione detrazione da lavoro dipendente"
-                    data-tooltip="Riduce l’IRPEF lorda. Qui è calcolata per un rapporto attivo per tutto l’anno."
+                    data-tooltip="Riduce l'IRPEF lorda. Qui è calcolata per un rapporto attivo per tutto l'anno."
                   >i</button>
                 </dt>
                 <dd data-money-positive="employeeDeduction">+ €0</dd>
@@ -207,11 +282,11 @@
                 <dd data-money-negative="netIrpef">− €0</dd>
               </div>
               <div>
-                <dt>Addizionale regionale Lombardia</dt>
+                <dt>Addizionale regionale <span data-location-region>Lombardia</span></dt>
                 <dd data-money-negative="regionalTax">− €0</dd>
               </div>
               <div>
-                <dt>Addizionale comunale Milano</dt>
+                <dt>Addizionale comunale <span data-location-municipality>Milano</span></dt>
                 <dd data-money-negative="municipalTax">− €0</dd>
               </div>
               <div class="calculation-list__subtotal">
@@ -234,7 +309,8 @@
               <p class="eyebrow">IRPEF PROGRESSIVA</p>
               <h3 id="brackets-title">Scaglioni applicati</h3>
               <p>
-                Ogni aliquota colpisce solo la parte di imponibile compresa nel suo scaglione.
+                Ogni aliquota si applica soltanto alla quota di imponibile compresa nel
+                relativo scaglione.
               </p>
             </div>
             <div class="table-wrapper">
@@ -259,64 +335,102 @@
         </div>
       </section>
 
-      <section class="method" aria-labelledby="method-title">
-        <div class="section-heading">
+      <section class="method" id="method" aria-labelledby="method-title">
+        <div class="section-heading section-heading--compact">
           <div>
-            <p class="eyebrow">COSA C’È DIETRO</p>
-            <h2 id="method-title">Poche assunzioni, dichiarate</h2>
+            <p class="eyebrow">COME LEGGERE LA STIMA</p>
+            <h2 id="method-title">Un caso preciso, spiegato bene</h2>
           </div>
-          <p>Il prototipo privilegia trasparenza e verificabilità.</p>
+          <p>
+            Abbiamo fissato un profilo standard per tenere il calcolo comprensibile e
+            verificabile.
+          </p>
         </div>
+
         <div class="method-grid">
           <article>
             <span>01</span>
-            <h3>Caso standard</h3>
+            <h3>Scenario di lavoro</h3>
             <p>
-              Dipendente privato, impiegato a tempo indeterminato, residente a Milano,
-              rapporto attivo tutto il 2026 e nessun altro reddito o agevolazione.
+              Dipendente privato, impiegato a tempo indeterminato, residente a
+              <span data-location-municipality>Milano</span> e assunto per tutto il 2026.
             </p>
           </article>
           <article>
             <span>02</span>
             <h3>Contributi stimati</h3>
             <p>
-              Quota lavoratore al 9,19%, più 1% sulla parte di RAL oltre €56.224.
+              Quota lavoratore al 9,19%, più l'1% sulla parte di RAL oltre €56.224.
               Settore e dimensione aziendale possono cambiare il dato reale.
             </p>
           </article>
           <article>
             <span>03</span>
-            <h3>Perimetro intenzionale</h3>
+            <h3>Confini della stima</h3>
             <p>
-              Non include trattamento integrativo, ulteriore detrazione da cuneo fiscale,
-              bonus, premi, benefit, familiari, deduzioni o regole da cedolino mensile.
+              Non include bonus, benefit, familiari, deduzioni, trattamento integrativo
+              o regole specifiche del singolo cedolino.
             </p>
           </article>
         </div>
+
+        <div class="extension-note">
+          <div class="extension-mark" aria-hidden="true">↗</div>
+          <div>
+            <p class="card-kicker">PENSATO PER EVOLVERE</p>
+            <h3>Milano è fisso nell'interfaccia, non nel motore di calcolo.</h3>
+            <p>
+              Aliquote, soglie e fonti territoriali vivono in un profilo separato. Una
+              nuova località può essere aggiunta senza riscrivere le formule nazionali.
+            </p>
+          </div>
+          <a
+            href="https://github.com/Student13Thirteen/jet-hr-net-salary-calculator/blob/main/docs/ESTENDERE_LOCALITA.md"
+            target="_blank"
+            rel="noreferrer"
+          >Leggi la guida</a>
+        </div>
       </section>
 
-      <section class="sources" aria-labelledby="sources-title">
+      <section class="sources" id="sources" aria-labelledby="sources-title">
         <div>
-          <p class="eyebrow">FONTI UFFICIALI</p>
-          <h2 id="sources-title">Numeri controllabili</h2>
+          <p class="eyebrow">FONTI CONSULTATE</p>
+          <h2 id="sources-title">Dati che puoi verificare</h2>
           <p>
-            Aliquote e soglie sono configurate in un solo file e collegate alle fonti
-            istituzionali consultate.
+            I parametri sono raccolti nella configurazione e collegati alle pagine
+            istituzionali da cui provengono.
           </p>
         </div>
         <ul>
-          <li><a href="https://www.normattiva.it/eli/id/2025/12/30/25G00212/ORIGINAL" target="_blank" rel="noreferrer">Normattiva — Legge di Bilancio 2026</a></li>
-          <li><a href="https://www.regione.lombardia.it/bollo-auto-e-tributi-regionali/red-addizionale-regionale-irpef" target="_blank" rel="noreferrer">Regione Lombardia — Addizionale regionale</a></li>
-          <li><a href="https://www.comune.milano.it/aree-tematiche/tributi/addizionale-comunale-irpef" target="_blank" rel="noreferrer">Comune di Milano — Addizionale comunale</a></li>
-          <li><a href="https://www.inps.it/it/it/inps-comunica/atti/circolari-messaggi-e-normativa/dettaglio.circolari-e-messaggi.2026.01.circolare-numero-6-del-30-01-2026_15151.html" target="_blank" rel="noreferrer">INPS — Parametri contributivi 2026</a></li>
+          <li>
+            <a
+              href="https://www.normattiva.it/eli/id/2025/12/30/25G00212/ORIGINAL"
+              target="_blank"
+              rel="noreferrer"
+            >Normattiva — Legge di Bilancio 2026</a>
+          </li>
+          <li>
+            <a
+              href="https://www.inps.it/it/it/inps-comunica/atti/circolari-messaggi-e-normativa/dettaglio.circolari-e-messaggi.2026.01.circolare-numero-6-del-30-01-2026_15151.html"
+              target="_blank"
+              rel="noreferrer"
+            >INPS — Parametri contributivi 2026</a>
+          </li>
+          <li><a id="regional-source" href="#" target="_blank" rel="noreferrer">Regione</a></li>
+          <li><a id="municipal-source" href="#" target="_blank" rel="noreferrer">Comune</a></li>
+          <li><a id="finance-source" href="#" target="_blank" rel="noreferrer">Dipartimento delle Finanze</a></li>
         </ul>
       </section>
     </main>
 
     <footer>
+      <div class="footer-brand">
+        <span class="brand-mark" aria-hidden="true">Q</span>
+        <strong>Quanto resta?</strong>
+      </div>
       <p>
-        Questa simulazione è una stima semplificata a scopo informativo e non sostituisce
-        il cedolino, il calcolo del datore di lavoro o una consulenza fiscale.
+        Questa simulazione è una stima semplificata a scopo informativo e non
+        sostituisce il cedolino, il calcolo del datore di lavoro o una consulenza fiscale.
       </p>
       <a href="#top">Torna su ↑</a>
     </footer>

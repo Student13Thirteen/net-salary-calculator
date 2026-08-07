@@ -28,6 +28,13 @@ La stima usa il **periodo d'imposta 2026** e assume:
 Il numero di mensilità, 12, 13 o 14, divide soltanto il netto annuale per mostrare una
 media. Non modifica il risultato annuale.
 
+Milano è una scelta intenzionale dell'interfaccia, non un valore inserito direttamente
+nelle formule. Il motore riceve un profilo territoriale separato che contiene anno,
+aliquote, soglie e fonti. In questo modo una nuova località può riusare la pipeline
+nazionale senza duplicarla.
+
+[Leggi la guida per aggiungere una nuova località](docs/ESTENDERE_LOCALITA.md).
+
 ## Logica del calcolo
 
 La pipeline è intenzionalmente lineare:
@@ -46,7 +53,22 @@ RAL
 ```
 
 Tutte le formule sono funzioni pure in `src/calculator.ts`.
-Aliquote, soglie e anno fiscale sono raccolti in `src/tax-config.ts`.
+Aliquote e soglie nazionali sono raccolte in `src/tax-config.ts`; i dati di Milano sono
+nel profilo `src/location-profiles.ts`.
+
+## Architettura territoriale
+
+Il profilo predefinito dichiara:
+
+- identificativo, comune, regione e anno fiscale;
+- scaglioni dell'addizionale regionale;
+- regola comunale piatta o progressiva e relativa esenzione;
+- fonti istituzionali;
+- data dell'ultima verifica.
+
+Il calcolatore rifiuta profili riferiti a un anno diverso da quello della configurazione
+nazionale. I test dimostrano inoltre che lo stesso motore può essere eseguito con un
+profilo territoriale alternativo senza cambiare IRPEF o detrazione nazionale.
 
 ### 1. Contributi previdenziali
 
@@ -198,18 +220,32 @@ npm run verify
 
 `npm run verify` esegue typecheck, test e build in sequenza.
 
-I test coprono validazione, progressività IRPEF, soglia comunale, reddito medio ed
-elevato, identità tra RAL e componenti, valori non negativi e mensilità.
+I 14 test coprono validazione, progressività IRPEF, soglia comunale, reddito medio ed
+elevato, identità tra RAL e componenti, valori non negativi, mensilità, profili
+territoriali, regole comunali progressive e coerenza dell'anno fiscale.
 
 ## Struttura essenziale
 
 ```text
 src/calculator.ts  formule e pipeline del calcolo
 src/tax-config.ts  aliquote, soglie e anno fiscale
+src/location-profiles.ts  profili territoriali, fonti e regole locali
 src/main.ts        input, validazione e rendering
 src/styles.css     interfaccia responsive e accessibile
 tests/             casi automatici e controlli manuali
+docs/ESTENDERE_LOCALITA.md  metodo per aggiungere una località
 ```
+
+## Scelte di interfaccia
+
+- **Wix Madefor Display** è incorporato nel bundle tramite Fontsource: la resa non
+  dipende dai font installati sul dispositivo.
+- I risultati principali mostrano separatamente netto annuale, netto medio, imposte e
+  contributi.
+- Milano è sempre visibile come scenario applicato, senza mostrare selezioni non ancora
+  supportate.
+- Animazioni e transizioni sono brevi e vengono disattivate quando il dispositivo
+  richiede movimento ridotto.
 
 ## Disclaimer
 

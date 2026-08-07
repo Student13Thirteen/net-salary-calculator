@@ -4,6 +4,11 @@ import {
   type MonthlyPayments,
   type OpenTaxBracket,
 } from "./tax-config";
+import {
+  DEFAULT_LOCATION_PROFILE,
+  type LocationProfile,
+  type MunicipalTaxRule,
+} from "./location-profiles";
 
 export interface AppliedTaxBracket {
   readonly lowerBound: number;
@@ -14,6 +19,8 @@ export interface AppliedTaxBracket {
 }
 
 export interface SalaryCalculation {
+  readonly locationProfileId: string;
+  readonly locationDisplayName: string;
   readonly grossAnnualSalary: number;
   readonly monthlyPayments: MonthlyPayments;
   readonly socialSecurityContributions: number;
@@ -139,9 +146,25 @@ export function calculateEmployeeDeduction(taxableIncome: number): number {
   return roundToCents(Math.max(0, deduction));
 }
 
+export function calculateMunicipalTax(
+  taxableIncome: number,
+  rule: MunicipalTaxRule,
+): number {
+  if (taxableIncome <= rule.exemptionThreshold) {
+    return 0;
+  }
+
+  if (rule.kind === "flat") {
+    return roundToCents(taxableIncome * rule.rate);
+  }
+
+  return calculateProgressiveTax(taxableIncome, rule.brackets).total;
+}
+
 export function calculateNetSalary(
   grossAnnualSalary: number,
   monthlyPayments: MonthlyPayments,
+  locationProfile: LocationProfile = DEFAULT_LOCATION_PROFILE,
 ): SalaryCalculation {
   const validationError = validateGrossSalary(grossAnnualSalary);
 
@@ -151,6 +174,12 @@ export function calculateNetSalary(
 
   if (!isSupportedMonthlyPayments(monthlyPayments)) {
     throw new RangeError("Il numero di mensilità deve essere 12, 13 o 14.");
+  }
+
+  if (locationProfile.taxYear !== TAX_CONFIG.taxYear) {
+    throw new RangeError(
+      `Il profilo territoriale deve riferirsi al ${TAX_CONFIG.taxYear}.`,
+    );
   }
 
   const socialSecurityContributions =
@@ -170,13 +199,12 @@ export function calculateNetSalary(
   const regionalTax = isIrpefDue
     ? calculateProgressiveTax(
         taxableIncome,
-        TAX_CONFIG.lombardyRegionalBrackets,
+        locationProfile.regionalTaxBrackets,
       ).total
     : 0;
   const municipalTax =
-    isIrpefDue &&
-    taxableIncome > TAX_CONFIG.milanMunicipalTax.exemptionThreshold
-      ? roundToCents(taxableIncome * TAX_CONFIG.milanMunicipalTax.rate)
+    isIrpefDue
+      ? calculateMunicipalTax(taxableIncome, locationProfile.municipalTax)
       : 0;
   const totalTaxes = roundToCents(netIrpef + regionalTax + municipalTax);
   const totalWithholdings = roundToCents(
@@ -187,6 +215,8 @@ export function calculateNetSalary(
   );
 
   return {
+    locationProfileId: locationProfile.id,
+    locationDisplayName: locationProfile.displayName,
     grossAnnualSalary: roundToCents(grossAnnualSalary),
     monthlyPayments,
     socialSecurityContributions,

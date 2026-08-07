@@ -34,16 +34,6 @@ export const TAX_CONFIG = {
     middleBonusFrom: 25_000,
     middleBonusTo: 35_000,
   },
-  lombardyRegionalBrackets: [
-    { upTo: 15_000, rate: 0.0123 },
-    { upTo: 28_000, rate: 0.0158 },
-    { upTo: 50_000, rate: 0.0172 },
-    { upTo: null, rate: 0.0173 },
-  ] satisfies readonly OpenTaxBracket[],
-  milanMunicipalTax: {
-    exemptionThreshold: 23_000,
-    rate: 0.008,
-  },
 } as const;
 
 export const SUPPORTED_MONTHLY_PAYMENTS = [12, 13, 14] as const;

@@ -1,3 +1,8 @@
+import "@fontsource/wix-madefor-display/latin-400.css";
+import "@fontsource/wix-madefor-display/latin-500.css";
+import "@fontsource/wix-madefor-display/latin-600.css";
+import "@fontsource/wix-madefor-display/latin-700.css";
+import "@fontsource/wix-madefor-display/latin-800.css";
 import "./styles.css";
 import {
   calculateNetSalary,
@@ -5,6 +10,7 @@ import {
   validateGrossSalary,
   type SalaryCalculation,
 } from "./calculator";
+import { DEFAULT_LOCATION_PROFILE } from "./location-profiles";
 
 const currencyFormatter = new Intl.NumberFormat("it-IT", {
   style: "currency",
@@ -170,13 +176,48 @@ function updateSalaryBar(calculation: SalaryCalculation): void {
   netPercentage.textContent = percentageFormatter.format(netShare);
   contributionsPercentage.textContent = percentageFormatter.format(contributionsShare);
   taxesPercentage.textContent = percentageFormatter.format(taxesShare);
+  contributionsRate.textContent = `${percentageFormatter.format(contributionsShare)} della RAL`;
+  taxesRate.textContent = `${percentageFormatter.format(taxesShare)} della RAL`;
+  withholdingsRate.textContent = `${percentageFormatter.format(contributionsShare + taxesShare)} trattenuto`;
+}
+
+function renderLocationProfile(): void {
+  document
+    .querySelectorAll<HTMLElement>("[data-location-display]")
+    .forEach((element) => {
+      element.textContent = DEFAULT_LOCATION_PROFILE.displayName;
+    });
+
+  document
+    .querySelectorAll<HTMLElement>("[data-location-municipality]")
+    .forEach((element) => {
+      element.textContent = DEFAULT_LOCATION_PROFILE.municipality;
+    });
+
+  document
+    .querySelectorAll<HTMLElement>("[data-location-region]")
+    .forEach((element) => {
+      element.textContent = DEFAULT_LOCATION_PROFILE.region;
+    });
+
+  const sourceBindings = [
+    ["#regional-source", DEFAULT_LOCATION_PROFILE.sources.regionalTax],
+    ["#municipal-source", DEFAULT_LOCATION_PROFILE.sources.municipalTax],
+    ["#finance-source", DEFAULT_LOCATION_PROFILE.sources.financeDepartment],
+  ] as const;
+
+  sourceBindings.forEach(([selector, source]) => {
+    const anchor = getElement<HTMLAnchorElement>(selector);
+    anchor.href = source.url;
+    anchor.textContent = source.label;
+  });
 }
 
 function renderCalculation(calculation: SalaryCalculation): void {
   updateMoneyValues(calculation);
   updateBrackets(calculation);
   updateSalaryBar(calculation);
-  resultContext.textContent = `Su una RAL di ${currencyFormatter.format(calculation.grossAnnualSalary)} · ${calculation.monthlyPayments} mensilità`;
+  resultContext.textContent = `${calculation.locationDisplayName} · RAL ${currencyFormatter.format(calculation.grossAnnualSalary)} · ${calculation.monthlyPayments} mensilità`;
   monthlyCaption.textContent = `Media su ${calculation.monthlyPayments} mensilità.`;
 
   if (results.hidden) {
@@ -187,7 +228,11 @@ function renderCalculation(calculation: SalaryCalculation): void {
   window.setTimeout(() => {
     delete results.dataset.visible;
   }, 400);
-  results.scrollIntoView({ behavior: "smooth", block: "start" });
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  results.scrollIntoView({
+    behavior: reducedMotion ? "auto" : "smooth",
+    block: "start",
+  });
 }
 
 const form = getElement<HTMLFormElement>("#salary-form");
@@ -204,7 +249,12 @@ const contributionsPercentage = getElement<HTMLElement>(
   "#contributions-percentage",
 );
 const taxesPercentage = getElement<HTMLElement>("#taxes-percentage");
+const contributionsRate = getElement<HTMLElement>("#contributions-rate");
+const taxesRate = getElement<HTMLElement>("#taxes-rate");
+const withholdingsRate = getElement<HTMLElement>("#withholdings-rate");
 const bracketsBody = getElement<HTMLTableSectionElement>("#brackets-body");
+
+renderLocationProfile();
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
