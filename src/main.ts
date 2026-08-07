@@ -65,7 +65,9 @@ function setInlineError(message: string): void {
   grossSalaryError.textContent = message;
 }
 
-function animateMoney(element: HTMLElement, target: number, prefix = ""): void {
+function animateMoney(element: HTMLElement, target: number, sign = ""): void {
+  // Un importo nullo non è né una trattenuta né un beneficio: niente segno davanti allo zero.
+  const prefix = target === 0 ? "" : sign;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (reducedMotion) {
@@ -177,7 +179,6 @@ function updateSalaryBar(calculation: SalaryCalculation): void {
   netPercentage.textContent = percentageFormatter.format(netShare);
   contributionsPercentage.textContent = percentageFormatter.format(contributionsShare);
   taxesPercentage.textContent = percentageFormatter.format(taxesShare);
-  contributionsRate.textContent = `${percentageFormatter.format(contributionsShare)} della RAL`;
   taxesRate.textContent = `${percentageFormatter.format(taxesShare)} della RAL`;
   withholdingsRate.textContent = `${percentageFormatter.format(contributionsShare + taxesShare)} trattenuto`;
 }
@@ -250,7 +251,6 @@ const contributionsPercentage = getElement<HTMLElement>(
   "#contributions-percentage",
 );
 const taxesPercentage = getElement<HTMLElement>("#taxes-percentage");
-const contributionsRate = getElement<HTMLElement>("#contributions-rate");
 const taxesRate = getElement<HTMLElement>("#taxes-rate");
 const withholdingsRate = getElement<HTMLElement>("#withholdings-rate");
 const bracketsBody = getElement<HTMLTableSectionElement>("#brackets-body");

@@ -100,16 +100,16 @@
               Usa l'importo lordo annuale indicato nella proposta o nel contratto.
             </p>
             <p class="field-error" id="gross-salary-error" aria-live="polite"></p>
-          </div>
 
-          <fieldset class="quick-values">
-            <legend>Valori rapidi</legend>
-            <div>
-              <button type="button" data-quick-value="25000">€25.000</button>
-              <button type="button" data-quick-value="35000">€35.000</button>
-              <button type="button" data-quick-value="50000">€50.000</button>
-            </div>
-          </fieldset>
+            <fieldset class="quick-values">
+              <legend>Valori rapidi</legend>
+              <div>
+                <button type="button" data-quick-value="25000">€25.000</button>
+                <button type="button" data-quick-value="35000">€35.000</button>
+                <button type="button" data-quick-value="50000">€50.000</button>
+              </div>
+            </fieldset>
+          </div>
 
           <div class="field-group">
             <label for="monthly-payments">Numero di mensilità</label>
@@ -185,19 +185,25 @@
           </div>
           <ul class="legend" aria-label="Legenda ripartizione RAL">
             <li>
-              <span class="legend-dot legend-dot--net"></span>
-              <div><span>Netto</span><strong id="net-percentage">0%</strong></div>
+              <p class="legend-name">
+                <span class="legend-dot legend-dot--net" aria-hidden="true"></span>Netto
+              </p>
+              <p class="legend-share" id="net-percentage">0%</p>
+              <p class="legend-amount" data-money="annualNetSalary">€0</p>
             </li>
             <li>
-              <span class="legend-dot legend-dot--contributions"></span>
-              <div>
-                <span>Contributi <small id="contributions-rate">0% della RAL</small></span>
-                <strong id="contributions-percentage">0%</strong>
-              </div>
+              <p class="legend-name">
+                <span class="legend-dot legend-dot--contributions" aria-hidden="true"></span>Contributi
+              </p>
+              <p class="legend-share" id="contributions-percentage">0%</p>
+              <p class="legend-amount" data-money="socialSecurityContributions">€0</p>
             </li>
             <li>
-              <span class="legend-dot legend-dot--taxes"></span>
-              <div><span>Imposte</span><strong id="taxes-percentage">0%</strong></div>
+              <p class="legend-name">
+                <span class="legend-dot legend-dot--taxes" aria-hidden="true"></span>Imposte
+              </p>
+              <p class="legend-share" id="taxes-percentage">0%</p>
+              <p class="legend-amount" data-money="totalTaxes">€0</p>
             </li>
           </ul>
         </article>
@@ -215,25 +221,23 @@
               </div>
               <div class="calculation-list__contribution">
                 <dt>
-                  Contributi previdenziali
-                  <button
+                  Contributi <span class="term-tail">previdenziali<button
                     class="info-button"
                     type="button"
                     aria-label="Spiegazione contributi previdenziali"
                     data-tooltip="Finanziano il sistema previdenziale. Non sono imposte e riducono l'imponibile fiscale."
-                  >i</button>
+                  >i</button></span>
                 </dt>
                 <dd data-money-negative="socialSecurityContributions">− €0</dd>
               </div>
               <div class="calculation-list__subtotal">
                 <dt>
-                  Imponibile fiscale
-                  <button
+                  Imponibile <span class="term-tail">fiscale<button
                     class="info-button"
                     type="button"
                     aria-label="Spiegazione imponibile fiscale"
                     data-tooltip="È la base su cui vengono calcolate IRPEF e addizionali: RAL meno contributi."
-                  >i</button>
+                  >i</button></span>
                 </dt>
                 <dd data-money="taxableIncome">€0</dd>
               </div>
@@ -243,13 +247,12 @@
               </div>
               <div class="calculation-list__credit">
                 <dt>
-                  Detrazione da lavoro dipendente
-                  <button
+                  Detrazione da lavoro <span class="term-tail">dipendente<button
                     class="info-button"
                     type="button"
                     aria-label="Spiegazione detrazione da lavoro dipendente"
                     data-tooltip="Riduce l'IRPEF lorda. Qui è calcolata per un rapporto attivo per tutto l'anno."
-                  >i</button>
+                  >i</button></span>
                 </dt>
                 <dd data-money-positive="employeeDeduction">+ €0</dd>
               </div>
