@@ -8,7 +8,7 @@ essenziale che porta dal lordo al netto in un caso standard.
 
 ## Demo live
 
-[Apri il calcolatore su GitHub Pages](https://student13thirteen.github.io/jet-hr-net-salary-calculator/)
+[Apri il calcolatore su GitHub Pages](https://student13thirteen.github.io/net-salary-calculator/)
 
 ## Caso simulato
 
